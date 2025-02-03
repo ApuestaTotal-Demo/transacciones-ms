@@ -1,8 +1,8 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 
 import { TransaccionesService } from './transacciones.service';
 
-@Controller('transacciones')
+@Controller('api/transacciones')
 export class TransaccionesController {
     constructor(private readonly transaccionesService: TransaccionesService) { }
 
@@ -17,12 +17,12 @@ export class TransaccionesController {
     }
 
     /**
-     * Obtener transacciones por tipo (depósito, retiro, compra).
+     * Obtener transacciones por tipo (deposito, retiro, compra).
      * @param tipo - Tipo de transacción.
      * @returns Lista de transacciones.
      */
-    @Get('tipo')
-    async obtenerTransaccionesPorTipo(@Query('tipo') tipo: string): Promise<any> {
+    @Get('tipo/:tipo')
+    async obtenerTransaccionesPorTipo(@Param('tipo') tipo: string): Promise<any> {
         return this.transaccionesService.obtenerTransaccionesPorTipo(tipo);
     }
 }
